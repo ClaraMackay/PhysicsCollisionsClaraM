@@ -40,7 +40,7 @@ local beam = display.newImage("Images/beam.png", 0, 0)
 
 	--set the beam size 
 	beam.width = display.contentWidth/2
-	beam.heigt = display. contentHeight/10
+	beam.height = display. contentHeight/10
 
 	-- rotate the beam 45 degrees so it is on an angle
 	beam:rotate(45)
@@ -60,11 +60,32 @@ local bkg = display.newImage("Images/bkg.png", 0, 0)
 
 	-- set the background size 
 	bkg.width = display.contentWidth
-	bkg.heigt = display.contentHeight
+	bkg.height = display.contentHeight
 
 	-- send to back 
 	bkg:toBack()
 
+--------------------------------------------------------------------------------
+
+-- create a verticle beam 
+local wallBeam = display.newImage("Images/beam.png", 0, 0)
+
+	--set the x and y positions
+	wallBeam.x = 1000
+	wallBeam.y = display.contentCenterY*1.65
+
+	--set the wallBeam size 
+	wallBeam.width = 1000
+	wallBeam.height = display. contentHeight/10
+
+	-- rotate the wallBeam 45 degrees so it is on an angle
+	wallBeam:rotate(90)
+
+	-- send it to the back layer 
+	wallBeam:toBack()
+
+	-- add to physics
+	physics.addBody(wallBeam, "static", {friction = 0.5, bounce = 0.3})
 ----------------------------------------------------------------------------------------
 --FUNCTIONS
 ----------------------------------------------------------------------------------------
@@ -94,12 +115,26 @@ end
 
 local function thirdBall()
 	-- creating second ball 
-	local ball2 = display.newImage("Images/super_ball.png", 0, 0)
+	local ball3 = display.newImage("Images/super_ball.png", 0, 0)
 
 	-- adding to physics
-	physics.addBody(ball2, {density = 1.0, friction = 0.5, bounce = 0.6, radius = 100})
+	physics.addBody(ball3, {density = 1.0, friction = 0.5, bounce = 0.4, radius = 100})
 
-	ball2:scale(1.0, 1.0)
+	ball3:scale(4.0, 4.0)
+
+end
+
+----------------------------------------------------------------------------------------
+
+local function fourthBall()
+	-- creating second ball 
+	local ball4 = display.newImage("Images/super_ball.png", 0, 0)
+
+	-- adding to physics
+	physics.addBody(ball4, {density = 1.0, friction = 0.7
+		, bounce = 0.6, radius = 50})
+
+	ball4:scale(3.0, 3.0)
 
 end
 
@@ -109,3 +144,4 @@ end
 timer.performWithDelay(0, firstBall)
 timer.performWithDelay(500, secondBall)
 timer.performWithDelay(499, thirdBall)
+timer.performWithDelay(450, fourthBall)
